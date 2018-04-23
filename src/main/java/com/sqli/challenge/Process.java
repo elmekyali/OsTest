@@ -16,7 +16,7 @@ class Process {
         roundRobinValue = roundRobinValue == 0 ? tasks.size() : roundRobinValue;
         StringBuilder out = new StringBuilder();
         String task;
-        while (roundRobinValue-- > 0 && (task = tasks.poll()) != null ) {
+        while (roundRobinValue-- > 0 && (task = tasks.poll()) != null) {
             out.append(execute(task));
         }
         return out.toString().equals("") ? Optional.empty() : Optional.of(out.toString());

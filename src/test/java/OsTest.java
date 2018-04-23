@@ -1,9 +1,6 @@
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import com.sqli.challenge.OsFacade;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class OsTest {
@@ -14,6 +11,7 @@ public class OsTest {
         osFacade.run();
         assertEquals("<<process1>>op1<<process1>>op2<<process1>>op2<<process1>>op1", osFacade.getExecutionResult());
     }
+
     @Test
     public void testExecuteTwoProcess() {
         OsFacade osFacade = new OsFacade();
@@ -22,6 +20,7 @@ public class OsTest {
         osFacade.run();
         assertEquals("<<process1>>op1<<process1>>op2<<process1>>op2<<process1>>op1<<process2>>op1<<process2>>op1", osFacade.getExecutionResult());
     }
+
     @Test
     public void testExecuteTwoProcessWithRoundRobinWithQuantumOne() {
         OsFacade osFacade = new OsFacade();
@@ -31,6 +30,7 @@ public class OsTest {
         osFacade.run();
         assertEquals("<<process1>>op1<<process2>>op1<<process1>>op2<<process2>>op1<<process1>>op2<<process1>>op1", osFacade.getExecutionResult());
     }
+
     @Test
     public void testExecuteTwoProcessWithRoundRobinWithQuantumTwo() {
         OsFacade osFacade = new OsFacade();

@@ -6,16 +6,16 @@ public class OsFacade {
 
     private List<Process> processList;
     private List<String> executionList;
-    private int roundRobinValue ;
+    private int roundRobinValue;
 
     public OsFacade() {
         this.processList = new LinkedList<>();
         this.executionList = new LinkedList<>();
-        roundRobinValue = 0;
+        this.roundRobinValue = 0;
     }
 
     public void createProcess(String processName, String tasks) {
-        processList.add(new Process(processName , TasksParser.parse(tasks)));
+        processList.add(new Process(processName, TasksParser.parse(tasks)));
     }
 
     public void run() {
@@ -29,11 +29,11 @@ public class OsFacade {
                 processList.remove(index);
             }
             index++;
-        }while (processList.size() != 0);
+        } while (processList.size() != 0);
     }
 
     public String getExecutionResult() {
-        return String.join("" , executionList);
+        return String.join("", executionList);
     }
 
     public void useRoundRobin(int number) {
