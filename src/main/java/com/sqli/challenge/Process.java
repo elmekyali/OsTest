@@ -12,11 +12,11 @@ class Process {
         this.tasks = tasks;
     }
 
-    Optional<String> run(int roundRobinValue) {
-        roundRobinValue = roundRobinValue == 0 ? tasks.size() : roundRobinValue;
+    Optional<String> run(int quantumValue) {
+        quantumValue = quantumValue == 0 ? tasks.size() : quantumValue;
         StringBuilder out = new StringBuilder();
         String task;
-        while (roundRobinValue-- > 0 && (task = tasks.poll()) != null) {
+        while (quantumValue-- > 0 && (task = tasks.poll()) != null) {
             out.append(execute(task));
         }
         return out.toString().equals("") ? Optional.empty() : Optional.of(out.toString());

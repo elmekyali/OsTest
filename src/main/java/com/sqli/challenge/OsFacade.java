@@ -4,14 +4,15 @@ import java.util.*;
 
 public class OsFacade {
 
+    private static final int DEFAULT_QUANTUM_VALUE = 0;
     private List<Process> processList;
     private List<String> executionList;
-    private int roundRobinValue;
+    private int quantumValue;
 
     public OsFacade() {
         this.processList = new LinkedList<>();
         this.executionList = new LinkedList<>();
-        this.roundRobinValue = 0;
+        this.quantumValue = DEFAULT_QUANTUM_VALUE;
     }
 
     public void createProcess(String processName, String tasks) {
@@ -22,7 +23,7 @@ public class OsFacade {
         int index = 0;
         do {
             index = index % processList.size();
-            Optional<String> execution = processList.get(index).run(roundRobinValue);
+            Optional<String> execution = processList.get(index).run(quantumValue);
             if (execution.isPresent()) {
                 executionList.add(execution.get());
             } else {
@@ -37,6 +38,6 @@ public class OsFacade {
     }
 
     public void useRoundRobin(int number) {
-        roundRobinValue = number;
+        quantumValue = number;
     }
 }
