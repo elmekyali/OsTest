@@ -1,43 +1,28 @@
 package com.sqli.challenge;
 
-import java.util.*;
-
 public class OsFacade {
 
-    private static final int DEFAULT_QUANTUM_VALUE = 0;
-    private List<Process> processList;
-    private List<String> executionList;
-    private int quantumValue;
+    private final Os os;
+    private final TasksParser tasksParser;
 
     public OsFacade() {
-        this.processList = new LinkedList<>();
-        this.executionList = new LinkedList<>();
-        this.quantumValue = DEFAULT_QUANTUM_VALUE;
+        this.os = new Os();
+        this.tasksParser = new DefaultTasksParser();
     }
 
     public void createProcess(String processName, String tasks) {
-        processList.add(new Process(processName, TasksParser.parse(tasks)));
+        this.os.add(new Process(processName, tasksParser.parse(tasks)));
     }
 
     public void run() {
-        int index = 0;
-        do {
-            index = index % processList.size();
-            Optional<String> execution = processList.get(index).run(quantumValue);
-            if (execution.isPresent()) {
-                executionList.add(execution.get());
-            } else {
-                processList.remove(index);
-            }
-            index++;
-        } while (processList.size() != 0);
+        this.os.runAllProcess();
     }
 
     public String getExecutionResult() {
-        return String.join("", executionList);
+        return this.os.result();
     }
 
-    public void useRoundRobin(int number) {
-        quantumValue = number;
+    public void useRoundRobin(int quantum) {
+        this.os.addQuantum(quantum);
     }
 }

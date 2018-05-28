@@ -1,12 +1,7 @@
 package com.sqli.challenge;
 
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.Queue;
-import java.util.stream.Collectors;
+import java.util.Collection;
 
-class TasksParser {
-    static Queue<String> parse(String tasks) {
-        return Arrays.stream(tasks.split(";")).collect(Collectors.toCollection(ArrayDeque::new));
-    }
+public interface TasksParser {
+    Collection<String> parse(String tasks);
 }
