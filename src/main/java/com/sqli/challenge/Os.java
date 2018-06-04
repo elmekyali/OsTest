@@ -18,11 +18,11 @@ class Os {
     }
 
     void runAllProcess() {
-        Process process;
-        while ((process = processList.poll()) != null) {
-            Optional<String> execution = process.run(this.quantum);
-            execution.ifPresent(execution_ -> {
-                this.executionList.add(execution_);
+        while (!processList.isEmpty()) {
+            Process process = processList.poll();
+            Optional<String> currentExecution = process.run(this.quantum);
+            currentExecution.ifPresent(execution -> {
+                this.executionList.add(execution);
                 processList.add(process);
             });
         }

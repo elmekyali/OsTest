@@ -1,25 +1,22 @@
 package com.sqli.challenge;
 
-import java.util.ArrayDeque;
-import java.util.Collection;
-import java.util.Optional;
-import java.util.Queue;
+import java.util.*;
+import java.util.stream.Collectors;
 
 class Process {
     private String processName;
     private Queue<String> tasks;
 
-    Process(String processName, Collection<String> tasks) {
+    Process(String processName, String tasks) {
         this.processName = processName;
-        this.tasks = new ArrayDeque<>(tasks);
+        this.tasks = Arrays.stream(tasks.split(";")).collect(Collectors.toCollection(ArrayDeque::new));
     }
 
     Optional<String> run(int quantumValue) {
-        quantumValue = quantumValue == 0 ? tasks.size() : quantumValue;
+        quantumValue = (quantumValue == 0) ? tasks.size() : quantumValue;
         StringBuilder out = new StringBuilder();
-
-        String task;
-        while (quantumValue-- > 0 && (task = tasks.poll()) != null) {
+        while (quantumValue-- > 0 && !tasks.isEmpty()) {
+            String task = tasks.poll();
             out.append(execute(task));
         }
         return out.toString().equals("") ? Optional.empty() : Optional.of(out.toString());
